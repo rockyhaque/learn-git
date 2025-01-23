@@ -1,70 +1,129 @@
-## Chown - Change Ownership
+# Creating a Second Commit
 
-The `chown` command is used to change the ownership of a file or directory. If you don’t own a file or directory, you’ll need `sudo` (root privileges) to change its ownership.
+In this lesson, you'll create a second commit to add a new file to your Git repository. This will help you understand how Git tracks changes and builds a history of your project. You'll also inspect the commit object to see how it differs from the first commit.
 
-### When to Use `sudo` with `chown`
+---
 
-While `chmod` allows you to change the permissions of any file or directory that you own, `chown` allows you to change the owner of a file or directory. Since this command affects ownership, it requires root privileges.
+## Steps to Create a Second Commit
 
-### Assignment: Changing Ownership of a Directory
+1. **Create a New File:**  
+   Create a file called `titles.md` in your repository and add the following content:
 
-In this assignment, we will change the owner of a directory to `root` using `chown`. Here are the steps:
+   ```markdown
+   # Titles
 
-1. **Navigate to the Directory**:
-   Change into the `worldbanc/private` directory:
-
-   ```
-   cd worldbanc/private
-   ```
-
-2. **List the Contents**:
-   Take a look at the contents with the `ls` command:
-
-   ```
-   ls
+   - A River Runs Through It
+   - Fight Club
+   - 12 Years a Slave
+   - The Big Short
+   - 12 Monkeys
    ```
 
-   You should see a directory called `contacts`.
+2. **Stage the File:**  
+   Use `git add` to stage the new file for the next commit:
 
-3. **Inspect the Contents of the `contacts` Directory**:
-   Change into the `contacts` directory:
-
-   ```
-   cd contacts
+   ```bash
+   git add titles.md
    ```
 
-   List its contents:
-
-   ```
-   ls
-   ```
-
-   You should see a file called `emergency.txt`.
-
-4. **View the Contents of the File**:
-   Display the contents of `emergency.txt` with the `cat` command:
-
-   ```
-   cat emergency.txt
+3. **Commit the Changes:**  
+   Commit the changes with a meaningful commit message. For example:
+   ```bash
+   git commit -m "Add titles.md with a list of movie titles"
    ```
 
-   This file contains personal contact information, and we want to limit its access.
+---
 
-5. **Change Ownership**:
-   Change the owner of the entire `contacts` directory to `root` using the following command:
+## Inspecting the Second Commit
 
-   ```
-   sudo chown -R root contacts
+After creating the second commit, you can inspect it using `git cat-file -p`. Follow these steps:
+
+1. **Find the Commit Hash:**  
+   Use `git log` to find the hash of the second commit:
+
+   ```bash
+   git log
    ```
 
-   - `sudo`: Run the command as the root user
-   - `chown`: Command to change the owner
-   - `-R`: Apply the changes recursively to everything inside the directory
-   - `root`: The new owner
-   - `contacts`: The directory to change ownership of
+2. **Inspect the Commit Object:**  
+   Use `git cat-file -p` to view the contents of the commit object:
 
-6. **Verify Ownership Change**:
-   From the `worldbanc/private` directory, run the following command to check the ownership:
+   ```bash
+   git cat-file -p <commit-hash>
    ```
-   ls -l
-   ```
+
+   Replace `<commit-hash>` with the actual hash of the second commit.
+
+---
+
+## Example Output of the Second Commit
+
+When you inspect the second commit, you'll see output similar to this:
+
+```
+tree 8c7e5a4d2f1e4f6e8a9b1c2d3e4f5a6b7c8d9e0f
+parent 5ba786fcc93e8092831c01e71444b9baa2228a4f
+author Your Name <your.email@example.com> 1698765432 +0000
+committer Your Name <your.email@example.com> 1698765432 +0000
+
+Add titles.md with a list of movie titles
+```
+
+### Explanation of the Output:
+
+- **tree:** The hash of the tree object representing the directory structure at the time of the commit.
+- **parent:** The hash of the previous commit. This links the second commit to the first commit, forming a chain of commits.
+- **author:** The name, email, and timestamp of the person who made the changes.
+- **committer:** The name, email, and timestamp of the person who committed the changes (usually the same as the author).
+- **Commit Message:** The message describing the changes made in the commit.
+
+---
+
+## What's Different in the Second Commit?
+
+The second commit includes a **parent** field, which references the hash of the first commit. This field is not present in the first commit because it has no parent. The parent field links commits together to form the repository's history.
+
+---
+
+## Why Create a Second Commit?
+
+- **Build History:** Each commit represents a snapshot of your project, allowing you to track changes over time.
+- **Understand Commit Structure:** Inspecting commit objects helps you understand how Git links commits together to form a history.
+- **Practice Git Workflow:** Staging and committing changes is a fundamental part of using Git effectively.
+
+---
+
+## Next Steps
+
+Now that you've created a second commit, you can continue making changes, staging files, and committing them to build a complete history of your project. Combine this knowledge with other Git commands to become a more effective developer.
+
+Happy coding! 🚀
+
+---
+
+## Difference Between the First and Second Commit
+
+The key difference between the first and second commit is the presence of the **parent** field in the second commit. Here's a comparison:
+
+### First Commit:
+
+```
+tree 4e507fdc6d9044ccd8a4a3061324c9f711c4667d
+author Your Name <your.email@example.com> 1698765432 +0000
+committer Your Name <your.email@example.com> 1698765432 +0000
+
+Add contents.md
+```
+
+### Second Commit:
+
+```
+tree 8c7e5a4d2f1e4f6e8a9b1c2d3e4f5a6b7c8d9e0f
+parent 5ba786fcc93e8092831c01e71444b9baa2228a4f
+author Your Name <your.email@example.com> 1698765432 +0000
+committer Your Name <your.email@example.com> 1698765432 +0000
+
+Add titles.md with a list of movie titles
+```
+
+The **parent** field in the second commit links it to the first commit, creating a chain of commits that represents the history of your repository.

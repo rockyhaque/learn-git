@@ -1,43 +1,98 @@
-## Using `sudo` to Delete a Directory
+# Storing Data in Git
 
-Before starting this assignment, ensure that the permissions on the `worldbanc/private/contacts` directory are set to `drwx------`, the owner is `root`, and you're not signed in as the `root` user. You can check these with the `ls -l` command.
+Git stores data in a unique way that ensures efficiency and reliability. Unlike some version control systems that store only the changes (deltas) between commits, Git stores **entire snapshots** of your project for each commit. This approach, combined with optimizations like compression and deduplication, ensures that your repository remains efficient even as it grows.
 
-### Assignment: Deleting the `contacts` Directory
+---
 
-In this assignment, you'll delete the `contacts` directory. Since the directory is owned by `root`, you will need to use `sudo` to perform the action.
+## How Git Stores Data
 
-#### Steps:
+1. **Snapshots, Not Deltas:**  
+   Each commit in Git stores a complete snapshot of your project at that point in time. This means that every file in your repository is stored in its entirety for each commit.
 
-1. **Check the Permissions and Ownership**:
-   Before proceeding, verify that the `contacts` directory has the correct permissions and ownership:
+2. **Optimizations:**  
+   To prevent the `.git` directory from becoming excessively large, Git uses several optimizations:
+   - **Compression:** Git compresses files to reduce storage size.
+   - **Deduplication:** If a file remains unchanged between commits, Git stores it only once and references it in subsequent commits.
 
-   ```
-   ls -l worldbanc/private/contacts
-   ```
+---
 
-   The directory should be `drwx------`, and the owner should be `root`.
+## Assignment: Exploring Git's Data Storage
 
-2. **Try Deleting the Directory Without `sudo`**:
-   Attempt to delete the `contacts` directory using the `rm` command:
+In this assignment, you'll explore how Git stores data by creating new files and inspecting their blob hashes.
 
-   ```
-   rm -r contacts
-   ```
+### Step 1: Inspect the Blob Hash for `titles.md`
 
-   Since you don’t have permission to delete it (the owner is `root`), the command should fail.
+1. Use `git cat-file -p` to view the hash of the blob for the `titles.md` file in your last commit:
 
-3. **Delete the Directory with `sudo`**:
-   To delete the directory, use `sudo` to run the command as the root user:
-
-   ```
-   sudo rm -r contacts
+   ```bash
+   git cat-file -p <commit-hash> | grep titles.md
    ```
 
-   This will allow you to delete the directory since `sudo` gives you the necessary elevated privileges.
+   Save this hash for later comparison.
 
-4. **Verify Deletion**:
-   Once the directory is deleted, run the following command from inside the `worldbanc/private` directory:
+### Step 2: Add New Files
+
+1. Create a new directory called `quotes`:
+
+   ```bash
+   mkdir quotes
    ```
-   ls
+
+2. Add two files inside the `quotes` directory:
+
+   - **`starwars.md`**:
+
+     ```markdown
+     - "May the Force be with you"
+     - "I find your lack of faith disturbing"
+     - "I am your father"
+     - "Do or do not. There is no try"
+     - "I've got a bad feeling about this"
+     ```
+
+   - **`dune.md`**:
+     ```markdown
+     - "May thy knife chip and shatter"
+     - "A Great Man Doesn't Seek To Lead. He's Called To It."
+     - "An Animal Caught In A Trap Will Gnaw Off Its Own Leg To Escape. What Will You Do?"
+     - "When Is A Gift Not A Gift?"
+     ```
+
+### Step 3: Stage and Commit the Changes
+
+1. Stage the new files:
+
+   ```bash
+   git add quotes/starwars.md quotes/dune.md
    ```
-   This will list the remaining contents of the `private` directory.
+
+   Alternatively, stage all changes at once:
+
+   ```bash
+   git add .
+   ```
+
+2. Commit the changes with a meaningful commit message. For example:
+   ```bash
+   git commit -m "Add quotes directory with starwars.md and dune.md"
+   ```
+
+### Step 4: Inspect the Blob Hash for `titles.md` Again
+
+1. Use `git cat-file -p` to view the hash of the blob for the `titles.md` file in the latest commit:
+
+   ```bash
+   git cat-file -p <new-commit-hash> | grep titles.md
+   ```
+
+   You'll notice that the hash for `titles.md` is the same as before because the file hasn't changed. This demonstrates Git's deduplication feature.
+
+---
+
+## Why This Matters
+
+- **Efficiency:** By storing snapshots and deduplicating unchanged files, Git ensures that your repository remains efficient even as it grows.
+- **Reliability:** Storing entire snapshots makes it easier to recover previous states of your project.
+- **Understanding Git Internals:** Exploring how Git stores data helps you understand its architecture and use it more effectively.
+
+---

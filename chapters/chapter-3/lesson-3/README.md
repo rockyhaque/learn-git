@@ -1,82 +1,96 @@
-## Changing Permissions
+# Exploring Git Object Files
 
-The `chmod` command is used to change file and directory permissions. It stands for **change mode**.
-
-### Syntax
-
-```
-chmod [options] permissions file/directory
-```
-
-### Explanation of `chmod` Command
-
-- `u` → **User** (Owner)
-- `g` → **Group**
-- `o` → **Others**
-- `=` → **Set permissions to** the specified values
-- `rwx` → **Read**, **Write**, and **Execute** permissions
-- `g=` and `o=` → **Remove all permissions** for group and others
-- `-R` → **Recursively** apply the changes to all contents within the directory
-
-**Example:**
-
-```
-chmod -R u=rwx,g=,o= DIRECTORY
-```
-
-- Grants **read**, **write**, and **execute** permissions to the owner.
-- Removes all permissions from the group and others.
-- Applies changes to the directory and all its contents.
-
-🔎 **Tip:** Use `.` as a shortcut for the **current directory**.
+Git stores all its data as objects in the `.git/objects` directory. These objects are compressed and stored in a binary format, making them unreadable as plain text. In this lesson, you'll learn how to inspect the contents of a Git object file to understand what it contains.
 
 ---
 
-### Assignment: Secure the Private Directory
+## What is a Git Object File?
 
-1. **Check Current Permissions:**  
-   Use the `ls -l` command to display the permissions of the files in the `worldbanc/private` directory:
+A Git object file is a compressed file that stores data such as commits, trees, and blobs. These files are located in the `.git/objects` directory and are named using the SHA-1 hash of their contents. For example, a commit object might be stored in a file like `.git/objects/5b/a786fcc93e8092831c01e71444b9baa2228a4f`.
 
-   ```bash
-   ls -l worldbanc/private
-   ```
+---
 
-2. **Update Permissions:**  
-   Modify the permissions of the `private` directory and all its contents so that:
+## Inspecting a Git Object File
 
-   - **Owner** can **read**, **write**, and **execute**
-   - **Group** has **no permissions**
-   - **Others** have **no permissions**
+To inspect the contents of a Git object file, follow these steps:
 
-   Run the command:
+1. **Locate the Object File:**  
+   Use `git log` to find the commit hash and locate the corresponding object file in the `.git/objects` directory. For example:
 
    ```bash
-   chmod -R u=rwx,g=,o= worldbanc/private
+   ls -al .git/objects/5b/a786fcc93e8092831c01e71444b9baa2228a4f
    ```
 
-3. **Verify Permissions:**  
-   Run the `ls -l` command again to ensure the permissions have been updated:
+2. **View the Raw Contents:**  
+   Attempt to view the contents of the file using the `cat` command:
 
    ```bash
-   ls -l worldbanc/private
+   cat .git/objects/5b/a786fcc93e8092831c01e71444b9baa2228a4f
    ```
 
-4. **Automatic Verification:**  
-    The system will automatically verify if the permissions for the `private` directory are set to `drwx------`.
+   You'll notice that the output is unreadable because the file is compressed.
 
-   **Expected Output:**
+3. **View the Contents in Hexadecimal Format:**  
+   Use the `xxd` command to view the contents of the file in hexadecimal format:
 
+   ```bash
+   xxd .git/objects/5b/a786fcc93e8092831c01e71444b9baa2228a4f
    ```
-   total 0
-   drwx------@ 7 username  staff  224 Jan 13 21:04 bin
-   drwx------@ 4 username  staff  128 Jan 13 21:04 cmd
-   drwx------@ 3 username  staff   96 Jan 13 21:04 contacts
-   drwx------@ 3 username  staff   96 Jan 13 21:04 customers
-   drwx------@ 3 username  staff   96 Jan 15 16:04 example
-   drwx------@ 9 username  staff  288 Jan 13 21:04 logs
-   drwx------@ 7 username  staff  224 Jan 15 16:03 transactions
+
+   This will display the file's contents in a readable hexadecimal format.
+
+4. **Save the Output to a File:**  
+   Redirect the output of `xxd` to a temporary file for further inspection:
+   ```bash
+   xxd .git/objects/5b/a786fcc93e8092831c01e71444b9baa2228a4f > /tmp/commit_object_hex.txt
    ```
 
 ---
 
-⚠️ **Note:** Be cautious when using `chmod` with the `-R` flag as it recursively changes permissions for all contents in the directory.
+## Understanding the `/tmp/commit_object_hex.txt` File
+
+The `/tmp/commit_object_hex.txt` file contains the raw hexadecimal representation of the Git object. Here's what you need to know about it:
+
+- **Hexadecimal Representation:**  
+   The left column shows the **offset** (memory address) of the data in hexadecimal format. The middle columns show the **raw bytes** of the file in hexadecimal, and the right column shows the **ASCII representation** of those bytes (if printable).
+
+- **Compressed Data:**  
+   Git object files are compressed using **zlib compression**, so the raw bytes you see are not human-readable. The hexadecimal output represents the compressed data.
+
+- **Structure of a Git Object:**  
+   A Git object file typically contains:
+  - **Header:** The type of object (e.g., `commit`, `tree`, `blob`) and its size.
+  - **Content:** The actual data stored in the object (e.g., commit metadata, file contents).
+
+---
+
+## Where to View `/tmp/commit_object_hex.txt`
+
+The `/tmp/commit_object_hex.txt` file is saved in the `/tmp` directory, which is a temporary directory on your system. You can view its contents using the following methods:
+
+1. **Using `cat` Command:**  
+   Open a terminal and run:
+
+   ```bash
+   cat /tmp/commit_object_hex.txt
+   ```
+
+2. **Using a Text Editor:**  
+   Open the file in a text editor like `nano`, `vim`, or any GUI-based editor:
+
+   ```bash
+   nano /tmp/commit_object_hex.txt
+   ```
+
+3. **Using a File Manager:**  
+   Navigate to the `/tmp` directory using your system's file manager and open the file directly.
+
+---
+
+## Why Inspect Git Object Files?
+
+- **Understand Git Internals:** Inspecting object files helps you understand how Git stores and manages data.
+- **Debugging:** If something goes wrong, examining object files can help you diagnose issues.
+- **Learning:** Exploring Git's internal data structures is a great way to deepen your knowledge of how Git works.
+
+---
