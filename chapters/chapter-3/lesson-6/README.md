@@ -91,16 +91,6 @@ The second commit includes a **parent** field, which references the hash of the 
 - **Understand Commit Structure:** Inspecting commit objects helps you understand how Git links commits together to form a history.
 - **Practice Git Workflow:** Staging and committing changes is a fundamental part of using Git effectively.
 
----
-
-## Next Steps
-
-Now that you've created a second commit, you can continue making changes, staging files, and committing them to build a complete history of your project. Combine this knowledge with other Git commands to become a more effective developer.
-
-Happy coding! 🚀
-
----
-
 ## Difference Between the First and Second Commit
 
 The key difference between the first and second commit is the presence of the **parent** field in the second commit. Here's a comparison:
