@@ -1,29 +1,56 @@
-## Shebang (#!)
+# Retrieving Git Configuration Values
 
-A **shebang** is a special line at the top of a script that tells the system which interpreter to use to run the script.
+Git allows you to retrieve specific configuration values using the `--get` flag. This is useful when you want to access a single value from your Git configuration without listing all the settings. In this lesson, you'll learn how to use the `--get` flag to retrieve a specific configuration value.
 
-### Format
+---
 
-```bash
-#! interpreter [optional-arg]
-```
+## How to Retrieve a Configuration Value
 
-### Example
-
-For a Python script using Python 3:
+To retrieve a specific configuration value, use the following syntax:
 
 ```bash
-#!/usr/bin/python3
+git config --get <key>
 ```
 
-This instructs the system to use the Python 3 interpreter located at `/usr/bin/python3`.
-
-### Viewing a Shebang
-
-To view the shebang of a script, use the `cat` command:
+### Example:
 
 ```bash
-cat private/bin/genids.sh
+git config --get user.name
 ```
 
-This command displays the shebang line at the top of the script, verifying which interpreter will run the script.
+This command retrieves the value of the `user.name` key from your Git configuration.
+
+---
+
+## Assignment: Retrieve a Custom Configuration Value
+
+In this assignment, you'll retrieve the value of the `webflyx.valuation` key from the local Git configuration of the `Webflyx` repository.
+
+1. **Retrieve the Value:**  
+   Use the `--get` flag to retrieve the value of the `webflyx.valuation` key:
+
+   ```bash
+   git config --get webflyx.valuation
+   ```
+
+   This will output the value `mid`, which you set earlier.
+
+---
+
+## Example Output
+
+When you run the command, you'll see output similar to this:
+
+```
+mid
+```
+
+---
+
+## Why Use `--get`?
+
+- **Efficiency:** Retrieve a single value without listing all configuration settings.
+- **Scripting:** Useful in scripts or automation where you need to access specific configuration values.
+- **Debugging:** Quickly check the value of a specific key to diagnose issues.
+
+---
