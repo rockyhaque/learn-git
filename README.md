@@ -9,8 +9,8 @@ Welcome to the **Learn Git** repository! This resource is designed to help you m
 - **🔹 [Chapter 1: Setup](./chapters/chapter-1/README.md)**  
    _Overview:_ Get introduced to Git and version control systems (VCS). Learn how to install Git, configure your identity, and understand its core concepts. Explore essential topics like command syntax, the difference between high-level (porcelain) and low-level (plumbing) commands, and how to use Git's built-in documentation.
 
-- **🔹 [Chapter 2: Setting Up Git](./chapters/chapter-2/README.md)**  
-   _Overview:_ Learn how to install and configure Git on your system. Set up your Git environment, including configuring user information, setting up SSH keys, and understanding the `.gitconfig` file.
+- **🔹 [Chapter 2: Repositories](./chapters/chapter-2/README.md)**  
+   _Overview:_ Learn how to create, manage, and track changes in Git repositories. Understand the core Git workflow, including staging changes, committing snapshots, and viewing commit history. Explore essential commands like `git init`, `git status`, `git add`, `git commit`, and `git log` to effectively version control your projects.
 
 - **🔹 [Chapter 3: Basic Git Commands](./chapters/chapter-3/README.md)**  
    _Overview:_ Explore essential Git commands such as `git init`, `git clone`, `git add`, `git commit`, `git status`, and `git log`. Learn how to create and manage repositories, track changes, and view commit history.

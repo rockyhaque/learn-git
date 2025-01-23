@@ -1,79 +1,79 @@
-# Absolute vs. Relative Paths
+# Committing Changes in Git
 
-## Understanding File Paths
-
-File paths are used to locate files and directories within a filesystem. They can be **absolute** or **relative**, depending on how they reference locations.
+After staging files, the next step is to **commit** them. A commit is a snapshot of your repository at a specific point in time. It saves the current state of your project and includes a message describing the changes made. Commits are the building blocks of your project's history in Git.
 
 ---
 
-## Relative Paths
+## What is a Commit?
 
-A **relative path** specifies a file or directory location based on the current working directory.
+A commit is a way to save the state of your repository. It includes:
 
-### Example Directory Structure:
-
-```
-vehicles
-├── cars
-│   ├── fords
-│   │   ├── mustang.txt
-│   │   └── focus.txt
-```
-
-### Relative Path Examples:
-
-- From the `vehicles` directory to `mustang.txt`:
-  ```bash
-  cars/fords/mustang.txt
-  ```
-- From the `cars` directory to `mustang.txt`:
-  ```bash
-  fords/mustang.txt
-  ```
-- From the `fords` directory to `mustang.txt`:
-  ```bash
-  mustang.txt
-  ```
-
-Relative paths are shorter and easier to work with when you're in or near the target directory.
+- **Changes:** All the modifications that were staged using `git add`.
+- **Message:** A description of the changes made in the commit. This helps you and others understand what was done and why.
 
 ---
 
-## Absolute Paths
+## How to Commit Changes
 
-An **absolute path** specifies a file or directory location starting from the root directory `/`.
-
-### Absolute Path Example:
-
-If `vehicles` is located at the root of the filesystem, the absolute path to `mustang.txt` is:
+To commit staged files, use the `git commit` command followed by the `-m` flag to include a commit message. For example:
 
 ```bash
-/vehicles/cars/fords/mustang.txt
+git commit -m "your message here"
 ```
 
-Regardless of the current directory, this path always points to the same file.
+### Example:
+
+```bash
+git commit -m "Add initial project structure"
+```
+
+This command creates a commit with the message `"Add initial project structure"`.
 
 ---
 
-## Choosing Between Absolute and Relative Paths
+## Steps to Commit Changes
 
-### When to Use Relative Paths:
+1. **Stage the Files:**  
+   Use `git add` to stage the files you want to include in the commit:
 
-- When working within a known directory structure.
-- For shorter and more readable commands.
-- In scripts that are run from specific directories.
+   ```bash
+   git add <file1> <file2>
+   ```
 
-### When to Use Absolute Paths:
+2. **Commit the Changes:**  
+   Use `git commit` to create a commit with a descriptive message:
 
-- When the current directory may vary.
-- When providing exact file locations to others.
-- In scripts that must work regardless of the working directory.
+   ```bash
+   git commit -m "Describe the changes made in this commit"
+   ```
+
+3. **Check the Status:**  
+   After committing, you can verify the status of your repository using:
+
+   ```bash
+   git status
+   ```
+
+   You should see output indicating that there are no changes to commit and the working directory is clean.
 
 ---
 
-## Summary
+## Fixing a Commit Message
 
-- **Relative Path:** Depends on the current directory. Easier for internal navigation.
-- **Absolute Path:** Starts from the root `/`. More reliable for universal access.
+If you make a mistake in your commit message, you can change it using the `--amend` flag. For example:
 
-Using the appropriate path type improves workflow efficiency and reduces navigation errors.
+```bash
+git commit --amend -m "Updated commit message"
+```
+
+This command updates the message of the most recent commit.
+
+---
+
+## Why Commit Changes?
+
+- **Track Progress:** Commits allow you to save and track the progress of your project over time.
+- **Collaborate Effectively:** Clear commit messages help team members understand the changes made.
+- **Revert Mistakes:** If something goes wrong, you can revert to a previous commit to undo changes.
+
+---

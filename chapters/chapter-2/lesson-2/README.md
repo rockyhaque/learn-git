@@ -1,82 +1,65 @@
-# WorldBanc Setup Guide
+# Understanding File States in Git
 
-## Understanding Filepaths
+In a Git repository, a file can be in one of several states. Understanding these states is crucial for effectively managing your project. Here are the key states:
 
-A **filepath** is a string that describes the location of a file or directory on your computer. An example of a filepath looks like this:
+1. **Untracked:**  
+   The file is not being tracked by Git. It exists in your working directory but has not been added to the repository.
 
-```
-/Users/rokib
-```
+2. **Staged:**  
+   The file has been marked for inclusion in the next commit. Changes to the file are ready to be saved in the repository's history.
 
-### Breakdown of the Filepath:
-
-- **/** : Represents the **root directory**, the topmost level of the filesystem.
-- **Users** : A directory inside the root directory.
-- **wagslane** : A directory inside the Users directory.
-
-This structure represents a path two levels down from the root directory:
-
-```
-root
-└── Users
-    └── rokib
-```
+3. **Committed:**  
+   The file has been saved to the repository's history. It is part of a snapshot (commit) in the Git timeline.
 
 ---
 
-## Assignment: Download and Set Up the WorldBanc Directory
+## Checking File Status with `git status`
 
-### Step 1: Download the WorldBanc Directory
+The `git status` command shows the current state of your repository. It tells you which files are untracked, staged, or committed. This command is essential for understanding the changes in your working directory and staging area.
 
-Run the following commands in your terminal to download and set up the **worldbanc** directory from the provided GitHub repository:
+---
+
+## Assignment: Create and Check Status of a File
+
+Let's create a file and check its status using `git status`.
+
+1. **Create a File:**  
+   In the root of your `webflyx` directory, create a file called `contents.md` and add the following text to it:
+
+   ```markdown
+   # contents
+   ```
+
+2. **Save the File:**  
+   Save the file after adding the text.
+
+3. **Check the Status:**  
+   Run the following command to check the status of your repository:
+
+   ```bash
+   git status
+   ```
+
+   You should see output indicating that `contents.md` is an **untracked file**.
+
+---
+
+## Example Output of `git status`
+
+After running `git status`, you might see something like this:
 
 ```bash
-# Clone the worldbanc directory from GitHub
-git clone https://github.com/rokib97/learn-shell-terminal.git
+On branch main
 
-# Navigate to the worldbanc folder
-cd learn-shell-terminal/worldbanc
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        contents.md
+
+nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-### Step 2: Verify the Setup
-
-1. **List Directory Contents**  
-   Run the following command to verify the **worldbanc** directory exists:
-
-   ```bash
-   ls
-   ```
-
-   You should see various files and folders inside the `worldbanc` directory.
-
-2. **Navigate into the worldbanc Directory**  
-   Ensure you are inside the correct directory:
-
-   ```bash
-   pwd
-   ```
-
-   The output should confirm the correct path: `.../learn-shell-terminal/worldbanc`
-
-3. **List Contents of worldbanc**  
-   Verify its contents:
-
-   ```bash
-   ls
-   ```
+This output tells you that `contents.md` is untracked and not yet staged for commit.
 
 ---
-
-## Troubleshooting
-
-- **git not installed?**  
-  Install it using:
-
-  ```bash
-  sudo apt install git
-  ```
-
-- **Can't paste in the terminal?**  
-  Use **Ctrl + Shift + V** to paste commands.
-
-If any issues occur, revisit the steps to redownload and set up the directory.
