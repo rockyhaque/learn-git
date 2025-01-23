@@ -1,73 +1,118 @@
-# Shell Configuration Audit
+# Handling Duplicate Keys in Git Configuration
 
-## Overview
+Git allows you to store **duplicate keys** in its configuration, which is unusual for a key-value store. This means you can have multiple values for the same key. However, this can lead to confusion, so Git provides the `--unset-all` flag to remove all instances of a key at once. In this lesson, you'll learn how to handle duplicate keys and use the `--unset-all` flag to clean up your configuration.
 
-This document guides you through identifying and editing your shell configuration file to determine which commands run automatically upon starting a new shell session.
+---
 
-## Identifying the Active Shell Configuration File
+## How to Add Duplicate Keys
 
-1. **List Hidden Files in the Home Directory:**  
-   Run the following command to display hidden files:
+To add multiple values for the same key, use the `--add` flag:
+
+```bash
+git config --add <key> "<value>"
+```
+
+### Example:
+
+```bash
+git config --add webflyx.ceo "Warren"
+git config --add webflyx.ceo "Carson"
+git config --add webflyx.ceo "Sarah"
+```
+
+This adds three values for the `webflyx.ceo` key.
+
+---
+
+## Viewing Duplicate Keys
+
+To view all configuration values, including duplicates, use the `--list` flag:
+
+```bash
+git config --list --local
+```
+
+### Example Output:
+
+```
+webflyx.ceo=Warren
+webflyx.ceo=Carson
+webflyx.ceo=Sarah
+```
+
+---
+
+## Removing All Instances of a Key
+
+To remove all instances of a key, use the `--unset-all` flag:
+
+```bash
+git config --unset-all <key>
+```
+
+### Example:
+
+```bash
+git config --unset-all webflyx.ceo
+```
+
+This removes all values for the `webflyx.ceo` key.
+
+---
+
+## Assignment: Handle Duplicate Keys
+
+In this assignment, you'll add multiple CEOs to the `Webflyx` configuration, view the duplicates, and then remove them all at once.
+
+1. **Add Multiple CEOs:**  
+   Add three CEOs to the `webflyx.ceo` key:
+
    ```bash
-   ls -a ~
+   git config --add webflyx.ceo "Warren"
+   git config --add webflyx.ceo "Carson"
+   git config --add webflyx.ceo "Sarah"
    ```
-2. **Determine Your Shell:**  
-   Check your current shell with:
-   ```bash
-   echo $SHELL
-   ```
-   - If the output includes `bash`, your configuration file is likely `~/.bashrc`.
-   - If it includes `zsh`, your configuration file is likely `~/.zshrc`.
 
-## Editing the Shell Configuration File
-
-1. **Open the Configuration File:**  
-   For Bash:
+2. **View the Configuration:**  
+   Use the `--list --local` flag to view the configuration:
 
    ```bash
-   nano ~/.bashrc
+   git config --list --local
    ```
 
-   For Zsh:
+   You should see multiple entries for the `webflyx.ceo` key.
+
+3. **Remove All CEOs:**  
+   Use the `--unset-all` flag to remove all instances of the `webflyx.ceo` key:
 
    ```bash
-   nano ~/.zshrc
+   git config --unset-all webflyx.ceo
    ```
 
-2. **Add a Test Command:**  
-   Scroll to the bottom of the file and add:
-
+4. **Verify the Removal:**  
+   Use the `--list --local` flag again to verify that all `webflyx.ceo` entries have been removed:
    ```bash
-   echo "Hello from the shell!"
+   git config --list --local
    ```
 
-3. **Save and Exit:**
+---
 
-   - Press `Ctrl + O` to save the file (confirm with `Enter`).
-   - Press `Ctrl + X` to exit the editor.
+## Example Output
 
-4. **Verify the Change:**
-   - Close the terminal.
-   - Open a new terminal session.
-   - If you see the message `Hello from the shell!`, the correct configuration file was edited.
+After adding the CEOs, the output of `git config --list --local` might look like this:
 
-## Cleanup
+```
+webflyx.ceo=Warren
+webflyx.ceo=Carson
+webflyx.ceo=Sarah
+```
 
-1. **Remove the Test Command:**  
-   Reopen the configuration file:
+After removing the CEOs, the output will no longer include the `webflyx.ceo` key.
 
-   ```bash
-   nano ~/.bashrc   # For Bash
-   nano ~/.zshrc    # For Zsh
-   ```
+---
 
-2. **Delete the Line:**  
-   Remove:
+## Why Use `--unset-all`?
 
-   ```bash
-   echo "Hello from the shell!"
-   ```
-
-3. **Save and Exit:**
-   - Press `Ctrl + O` to save.
-   - Press `Ctrl + X` to exit.
+- **Clean Up Duplicates:** Remove all instances of a key when duplicates are no longer needed.
+- **Avoid Confusion:** Ensure that your configuration is clear and free of unexpected duplicates.
+- **Debugging:** Fix issues caused by duplicate or conflicting configuration values.
