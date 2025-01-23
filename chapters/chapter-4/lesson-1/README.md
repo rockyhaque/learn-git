@@ -1,72 +1,90 @@
-# Compiled vs. Interpreted Programs
+# Git Configuration
 
-## Overview
+Git allows you to configure settings at different levels: **global** (applies to all repositories) and **local** (applies to a specific repository). These configurations help Git track information like your name, email, and other custom settings. In this lesson, you'll learn how to configure Git and store custom key-value pairs in your repository's local configuration.
 
-A program is a set of instructions that a computer can execute. These programs can be categorized broadly into two types:
+---
 
-- **Compiled Programs**
-- **Interpreted Programs**
+## How Git Configuration Works
 
-## Compiled Programs
+Git configuration is stored in files:
 
-A compiled program is transformed from human-readable source code into machine code (binary) through a compiler. The resulting executable file can run directly on a computer's CPU without needing any additional software.
+- **Global Configuration:** Located at `~/.gitconfig`. Applies to all repositories on your system.
+- **Local Configuration:** Located in the `.git/config` file of a specific repository. Applies only to that repository.
 
-### Characteristics
+You can use the `git config` command to add, update, or view configuration settings.
 
-- **Languages:** Go, C, Rust
-- **Execution:** Directly by the CPU
-- **Performance:** Typically faster due to direct execution
-- **Distribution:** Can be shared as standalone executables
+---
 
-## Interpreted Programs
+## Setting Git Configuration
 
-An interpreted program is executed by another program called an interpreter. The interpreter reads and executes the source code line-by-line or block-by-block.
+To set configuration values, use the following syntax:
 
-### Characteristics
+```bash
+git config [--global | --local] <section>.<key> "<value>"
+```
 
-- **Languages:** Python, Ruby, JavaScript
-- **Execution:** Requires an interpreter (e.g., Python interpreter, Node.js for JavaScript)
-- **Performance:** Slower due to real-time interpretation
-- **Distribution:** Source code is shared and run through interpreters
+### Example:
 
-### Example
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
 
-- `.sh` files (shell scripts) are interpreted by the shell program (e.g., `sh`).
+- **`--global`:** Applies the setting to all repositories.
+- **`--local`:** Applies the setting to the current repository only.
+- **`<section>.<key>`:** The configuration key (e.g., `user.name`).
+- **`"<value>"`:** The value to set for the key.
 
-## Practical Example
+---
 
-1. **Find the location of the `sh` program:**
+## Assignment: Set Custom Configuration
+
+In this assignment, you'll set custom key-value pairs in the local Git configuration for the `Webflyx` repository.
+
+1. **Set Custom Configuration:**  
+   Run the following commands to set custom key-value pairs in the local configuration:
+
    ```bash
-   which sh
+   git config --local webflyx.ceo "rokib"
+   git config --local webflyx.cto "hasan"
+   git config --local webflyx.valuation "mid"
    ```
-   Example Output:
-   ```
-   /bin/sh
-   ```
-2. **View the contents of the `sh` program:**
+
+2. **View the Configuration:**  
+   Use the `git config --list --local` command to view the local configuration:
 
    ```bash
-   cat /bin/sh
+   git config --list --local
    ```
 
-   Output will be unreadable because `/bin/sh` is a compiled binary.
+   Alternatively, you can view the contents of the `.git/config` file directly:
 
-3. **View a shell script:**
    ```bash
-   cat script.sh
+   cat .git/config
    ```
-   Output will be readable because `.sh` files are text-based commands interpreted by `sh`.
 
-## Key Differences
+---
 
-| Feature             | Compiled Programs          | Interpreted Programs     |
-| ------------------- | -------------------------- | ------------------------ |
-| **Translation**     | Compiled into machine code | Interpreted at runtime   |
-| **Execution Speed** | Faster                     | Slower                   |
-| **Portability**     | Platform-dependent         | More portable            |
-| **Error Detection** | At compile-time            | At runtime               |
-| **Examples**        | Go, C, Rust                | Python, Ruby, JavaScript |
+## Example Output of Local Configuration
 
-## Conclusion
+After setting the custom configuration, the output of `git config --list --local` might look like this:
 
-Both compiled and interpreted programs serve specific use cases. Compiled languages are preferred for performance-critical applications, while interpreted languages offer flexibility and ease of development.
+```
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+webflyx.ceo=rokib
+webflyx.cto=hasan
+webflyx.valuation=mid
+```
+
+---
+
+## Why Configure Git?
+
+- **Track Changes:** Git uses your name and email to track who made changes in the repository.
+- **Custom Settings:** You can store custom key-value pairs for repository-specific settings or metadata.
+- **Flexibility:** Git allows you to configure settings at both global and local levels, giving you control over how Git behaves in different contexts.
+
+---

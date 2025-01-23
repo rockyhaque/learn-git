@@ -15,7 +15,7 @@ Welcome to the **Learn Git** repository! This resource is designed to help you m
 - **🔹 [Chapter 3: Internals](./chapters/chapter-3/README.md)**  
    _Overview:_ Dive into the inner workings of Git and understand its core architecture. Learn about Git's object model, including commits, trees, and blobs, and how they work together to track changes. Explore low-level commands and data storage mechanisms to gain a deeper understanding of how Git manages version control under the hood.
 
-- **🔹 [Chapter 4: Branching and Merging](./chapters/chapter-4/README.md)**  
+- **🔹 [Chapter 4: Config](./chapters/chapter-4/README.md)**  
    _Overview:_ Dive into branching and merging in Git. Learn how to create, switch, and delete branches. Understand how to merge branches and resolve merge conflicts. Explore strategies like Git Flow and feature branching.
 
 - **🔹 [Chapter 5: Remote Repositories](./chapters/chapter-5/README.md)**  
