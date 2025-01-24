@@ -1,67 +1,64 @@
-# Understanding Standard Error (stderr) and Output Redirection
+# Exploring Git Files: How Git Stores Branch Information
 
-## What is Standard Error (stderr)?
+Git stores all its data, including information about branches, in the `.git` subdirectory at the root of your project. Specifically, the "heads" (or "tips") of branches are stored in the `.git/refs/heads` directory. Each file in this directory corresponds to a branch, and the content of the file is the commit hash that the branch points to.
 
-Standard Error, usually referred to as `stderr`, is a data stream used to output error messages. It functions separately from standard output (`stdout`), allowing users to redirect error messages independently of regular output.
+---
 
-By default, both `stdout` and `stderr` print to the terminal. However, they can be redirected to different locations if necessary.
+## Why Explore Git Files?
 
-## Redirecting Streams
+- **Understand Git Internals:** Learn how Git stores branch and commit information under the hood.
+- **Debugging:** Inspect branch pointers and commit hashes directly to diagnose issues.
+- **Learning:** Gain a deeper understanding of Git's architecture and data model.
 
-You can use redirection operators to send `stdout` and `stderr` to different places:
+---
 
-- `>` redirects `stdout` (standard output)
-- `2>` redirects `stderr` (standard error)
+## How Git Stores Branch Information
 
-### Redirecting stdout to a File
+- **Branch as a Pointer:** A branch is simply a named pointer to a specific commit. This pointer is stored in the `.git/refs/heads` directory.
+- **File Structure:** Each branch has a corresponding file in `.git/refs/heads`. The file name is the branch name, and its content is the commit hash that the branch points to.
 
-```bash
-echo "Hello world" > hello.txt
-cat hello.txt
-# Output:
-# Hello world
-```
+---
 
-### Redirecting stderr to a File
+## Assignment: Find the Commit Hash for the `main` Branch
 
-```bash
-cat doesnotexist.txt 2> error.txt
-cat error.txt
-# Output:
-# cat: doesnotexist.txt: No such file or directory
-```
+1. **Navigate to the `.git/refs/heads` Directory:**  
+   Use the `find` command to locate the file corresponding to the `main` branch:
 
-## Assignment Example
+   ```bash
+   find .git/refs/heads -name "main"
+   ```
 
-There is a script named `process_transactions.sh` located in the `worldbanc/private/bin` directory. This script processes a CSV file and outputs transactions based on the year:
+   This will output the path to the `main` branch file, such as:
 
-- Modern transactions (after the year 2000) are printed to `stdout`.
-- Old transactions (before the year 2000) are printed to `stderr`.
+   ```
+   .git/refs/heads/main
+   ```
 
-### Steps to Execute the Script
+2. **View the Commit Hash:**  
+   Use the `cat` command to view the content of the `main` branch file:
 
-1. Navigate to the appropriate directory or ensure the script path is correct.
-2. Run the script by passing the `2020.csv` file located in the `worldbanc/private/transactions` directory.
-3. Redirect the stderr output to a temporary log file:
+   ```bash
+   cat .git/refs/heads/main
+   ```
 
-```bash
-worldbanc/private/bin/process_transactions.sh worldbanc/private/transactions/2020.csv 2> /tmp/worldbanc.log
-```
+   This will output the commit hash that the `main` branch points to, such as:
 
-4. View the redirected stderr output by using the `cat` command:
+   ```
+   5ba786fcc93e8092831c01e71444b9baa2228a4f
+   ```
 
-```bash
-cat /tmp/worldbanc.log
-```
+---
 
-If the `2020.csv` file is missing, compare the files in the `transactions` directory with those in `transactions/backups` and copy the missing files if necessary:
+## Example Output
+
+After running the commands, you might see something like this:
 
 ```bash
-cp worldbanc/private/transactions/backups/2020.csv worldbanc/private/transactions/
+$ find .git/refs/heads -name "main"
+.git/refs/heads/main
+
+$ cat .git/refs/heads/main
+5ba786fcc93e8092831c01e71444b9baa2228a4f
 ```
 
-### Key Takeaways
-
-- Use `>` to redirect `stdout` to a file.
-- Use `2>` to redirect `stderr` to a file.
-- Temporary files in `/tmp` are routinely deleted by the system and are suitable for short-term storage.
+This means the `main` branch points to the commit with the hash `5ba786fcc93e8092831c01e71444b9baa2228a4f`.

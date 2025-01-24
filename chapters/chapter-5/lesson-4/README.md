@@ -1,57 +1,87 @@
-# Understanding the `help` Option in CLI Tools
+# Switching Branches in Git
 
-Most command-line interface (CLI) tools follow a common convention to provide a `help` option that displays usage instructions, available commands, and flags. This feature serves as a quick reference guide, helping users understand the tool without needing to read extensive documentation.
+In Git, **switching branches** allows you to move between different versions of your project. This is essential for working on multiple features, experiments, or bug fixes simultaneously. Git provides two commands for switching branches: `git switch` (recommended) and `git checkout` (older but still widely used). In this lesson, you'll learn how to switch branches using the `git switch` command.
 
-## Ways to Access Help in CLI Tools
+---
 
-Typically, CLI tools offer multiple ways to access help information:
+## Why Switch Branches?
 
-1. **Using the `--help` flag:**
+- **Work on Different Features:** Switch between branches to work on different tasks or features.
+- **Isolation:** Keep changes isolated in separate branches until they're ready to be merged.
+- **Testing:** Test changes in a specific branch without affecting the main codebase.
 
-   ```bash
-   toolname --help
-   ```
+---
 
-2. **Using the `-h` flag (short version):**
+## How to Switch Branches
 
-   ```bash
-   toolname -h
-   ```
-
-3. **Using `help` as a command:**
-   ```bash
-   toolname help
-   ```
-
-## Example: Using Help with `curl`
-
-`curl` is a popular command-line tool used for making network requests. To see its available options and usage instructions, you can use the `help` options:
-
-### Using `--help` Flag
+To switch to a branch, use the `git switch` command:
 
 ```bash
-curl --help
+git switch <branch-name>
 ```
 
-#### Example Output:
+### Example:
 
-```
-Usage: curl [options...] <url>
-Options:
-  -d, --data <data>      Send specified data in a POST request
-  -X, --request <command> Specify request command to use
-  -H, --header <header>   Pass custom header(s) to server
-  -o, --output <file>     Write output to <file> instead of stdout
-  -L, --location          Follow redirects
-  --help                  Display this help message and exit
+To switch to a branch called `prime`, run:
+
+```bash
+git switch prime
 ```
 
-## Why Use the Help Option?
+---
 
-- **Quick reference:** Provides a summary of available options and syntax.
-- **Discoverability:** Helps new users explore the tool's capabilities.
-- **Troubleshooting:** Identifies possible flags to resolve errors or achieve specific tasks.
+## Older Command: `git checkout`
 
-## Conclusion
+The `git checkout` command can also be used to switch branches, but it has additional functionalities that can make it less intuitive for simple branch switching. For example:
 
-Using the `help` option in CLI tools is an essential practice to efficiently understand their functionalities and features. Whether you're a beginner or an experienced user, it serves as a valuable resource to streamline your workflow.
+```bash
+git checkout prime
+```
+
+While `git checkout` is still widely used, `git switch` is recommended for switching branches because it is more straightforward and user-friendly.
+
+---
+
+## Assignment: Switch Between Branches
+
+1. **Switch to the `main` Branch:**  
+   Run the following command to switch to the `main` branch:
+
+   ```bash
+   git switch main
+   ```
+
+2. **Verify the Current Branch:**  
+   Run `git branch` to confirm that you're on the `main` branch. The current branch will be highlighted with an asterisk (`*`):
+
+   ```bash
+   git branch
+   ```
+
+   Example output:
+
+   ```
+     add_classics
+   * main
+   ```
+
+3. **Switch Back to the `add_classics` Branch:**  
+   Run the following command to switch back to the `add_classics` branch:
+
+   ```bash
+   git switch add_classics
+   ```
+
+4. **Verify the Current Branch:**  
+   Run `git branch` again to confirm that you're on the `add_classics` branch:
+
+   ```bash
+   git branch
+   ```
+
+   Example output:
+
+   ```
+   * add_classics
+     main
+   ```

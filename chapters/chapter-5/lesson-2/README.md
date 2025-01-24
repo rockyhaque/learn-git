@@ -1,78 +1,75 @@
-# Flags
+# Default Branch in Git
 
-Flags are options that can be passed to a command to modify its behavior. They provide additional functionality or information when executing commands in the terminal.
+In Git, the **default branch** is the primary branch where your stable code typically resides. Historically, the default branch was named `master`, but many platforms, including **GitHub**, have transitioned to using `main` as the default branch name. This change promotes inclusivity and aligns with modern best practices.
 
-## Common Flag Conventions
+---
 
-1. **Single-character flags:** Prefixed with a single dash (e.g., `-a`).
-2. **Multi-character flags:** Prefixed with double dashes (e.g., `--help`).
-3. **Combination of flags:** Multiple single-character flags can be combined (e.g., `ls -al`).
-4. **Interchangeable flags:** Some flags can be used with either a single or double dash (e.g., `-h` or `--help`).
+## Why Use `main` as the Default Branch?
 
-## Example Usage
+- **Modern Standard:** Platforms like GitHub now use `main` as the default branch name.
+- **Inclusivity:** The term `main` is more inclusive and neutral compared to `master`.
+- **Consistency:** Using `main` ensures consistency with remote repositories hosted on platforms like GitHub.
 
-- To list files with detailed information:
-  ```bash
-  ls -l
-  ```
-- To show all files, including hidden ones:
-  ```bash
-  ls -a
-  ```
-- To combine flags:
-  ```bash
-  ls -al
-  ```
+---
 
-## Practical Exercise
+## How to Rename a Branch
 
-To determine the number of bytes in a file, use the `wc` (word count) command.
+To rename a branch, use the following command:
 
-### Steps to Complete the Task
-
-1. **Use the `man` command to find the appropriate flag:**  
-   Open a terminal and type:
-
-   ```bash
-   man wc
-   ```
-
-   Look for the flag that counts the number of bytes in a file.
-
-2. **Run the `wc` command with the correct flag:**  
-   Execute the following command to count the bytes:
-
-   ```bash
-   wc -c worldbanc/public/pr_ideas.txt
-   ```
-
-   The `-c` flag counts the number of bytes in the specified file.
-
-3. **Verify the result:**  
-   The output will display the byte count followed by the file name. Ensure you take note of the number provided.
-
-4. **Submit the answer or use it for verification:**  
-   Use the obtained byte count to verify the file integrity or continue with the investigation.
-
-### Example Output
-
-```
-12345 worldbanc/public/pr_ideas.txt
+```bash
+git branch -m <old-name> <new-name>
 ```
 
-In this case, `12345` represents the number of bytes in the file.
+### Example:
 
-## Additional Notes
+To rename the `master` branch to `main`, run:
 
-- Hidden files can be listed using:
-  ```bash
-  ls -a
-  ```
-- Combine flags to get more detailed output, for example:
-  ```bash
-  ls -al
-  ```
+```bash
+git branch -m master main
+```
 
-## Conclusion
+---
 
-Using flags efficiently can help customize command behavior and obtain the desired output accurately.
+## Assignment: Switch to `main` as the Default Branch
+
+1. **Change the Global Default Branch:**  
+   Update your global Git configuration to use `main` as the default branch for new repositories:
+
+   ```bash
+   git config --global init.defaultBranch main
+   ```
+
+2. **Check the Current Branch:**  
+   Run the following command to see which branch you're currently on:
+
+   ```bash
+   git branch
+   ```
+
+   You should still be on the `master` branch because changing the default branch only affects new repositories.
+
+3. **Rename the Current Branch:**  
+   Rename the `master` branch to `main` in your current repository:
+
+   ```bash
+   git branch -m master main
+   ```
+
+4. **Verify the Change:**  
+   Run `git branch` again to confirm that you're now on the `main` branch:
+
+   ```bash
+   git branch
+   ```
+
+   The output should show `main` as the current branch.
+
+---
+
+## Why This Matters
+
+- **Consistency:** Aligning your local repository with remote platforms like GitHub ensures smoother collaboration.
+- **Best Practices:** Using `main` as the default branch follows modern Git conventions.
+- **Future-Proofing:** New repositories created on your system will automatically use `main` as the default branch.
+
+---

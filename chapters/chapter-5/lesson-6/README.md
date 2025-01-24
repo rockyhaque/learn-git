@@ -1,51 +1,80 @@
-# Standard Output
+# Exploring Git Log Flags
 
-## Overview
+The `git log` command is a powerful tool for viewing the commit history of your repository. By default, it shows a detailed list of commits, but you can customize its output using various flags. In this lesson, you'll learn about two useful flags: `--decorate` and `--oneline`. These flags help you make the output of `git log` more readable and informative.
 
-Standard output, commonly referred to as stdout, is the default destination where programs send their output. It usually refers to the terminal or console where results are displayed. Standard output can also be redirected to files or other processes for further processing.
+---
 
-## Importance
+## Why Use Git Log Flags?
 
-Understanding how to work with standard output is crucial for logging, debugging, and data extraction. It allows users to interact with program output effectively and automate tasks using command-line tools.
+- **Readability:** Customize the output of `git log` to make it easier to understand.
+- **Efficiency:** Quickly view the commit history without unnecessary details.
+- **Debugging:** Identify specific commits or branches more easily.
 
-## Common Usage
+---
 
-Standard output is used in various programming languages and command-line utilities to print results. For example:
+## Git Log Flags
 
-- In Python:
-  ```python
-  print("Hello, World!")
-  ```
-- In Shell:
+### 1. `--decorate`
+
+The `--decorate` flag adds information about **references** (e.g., branches, tags) to the commit history. It has three options:
+
+- **`short` (default):** Shows abbreviated branch and tag names.
+- **`full`:** Shows the full reference names.
+- **`no`:** Hides all references.
+
+#### Example:
+
+- **Full Decoration:**
+
   ```bash
-  echo "Hello, World!"
+  git log --decorate=full
   ```
 
-## Redirecting Standard Output
+  This shows the full reference names, such as `refs/heads/main` or `refs/heads/add_classics`.
 
-Standard output can be redirected to a file using the `>` operator or appended using `>>`.
+- **No Decoration:**
+
+  ```bash
+  git log --decorate=no
+  ```
+
+  This hides all branch and tag information.
+
+### 2. `--oneline`
+
+The `--oneline` flag condenses each commit into a single line, showing only the commit hash and the commit message. This is useful for quickly scanning the commit history.
+
+#### Example:
 
 ```bash
-echo "Hello" > output.txt
-echo "World" >> output.txt
-cat output.txt
+git log --oneline
 ```
 
-## Example
-
-To find all lines containing the word "Marshal" in a CSV file:
-
-```bash
-grep "Marshal" worldbanc/private/transactions/2020.csv
-```
-
-### Sample Output:
+Output:
 
 ```
-12345,John Marshal,Deposit,5000
-67890,Sarah Marshal,Withdrawal,3000
+5ba786f (HEAD -> main, origin/main) Add README file
+4e507fd Update dependencies
+3c1a2b0 Fix bug in login feature
 ```
 
-## Conclusion
+---
 
-Mastering standard output operations is essential for efficient command-line usage and automation of tasks related to data extraction and manipulation.
+## Assignment: Use Git Log Flags
+
+1. **Run `git log` with Full Decoration and Oneline Flag:**  
+   Combine the `--decorate=full` and `--oneline` flags to view a compact commit history with full reference names:
+
+   ```bash
+   git log --decorate=full --oneline
+   ```
+
+   Example output:
+
+   ```
+   5ba786f (HEAD -> refs/heads/main, refs/remotes/origin/main) Add README file
+   4e507fd (refs/heads/add_classics) Update dependencies
+   3c1a2b0 Fix bug in login feature
+   ```
+
+---

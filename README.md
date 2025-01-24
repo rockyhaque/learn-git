@@ -18,8 +18,8 @@ Welcome to the **Learn Git** repository! This resource is designed to help you m
 - **🔹 [Chapter 4: Config](./chapters/chapter-4/README.md)**  
    _Overview:_ Learn how to configure Git at local and global levels. Understand how to set, retrieve, and manage configuration values, handle duplicate keys, and remove unnecessary settings. Explore Git's configuration hierarchy and how to customize it for your workflow.
 
-- **🔹 [Chapter 5: Remote Repositories](./chapters/chapter-5/README.md)**  
-   _Overview:_ Learn how to work with remote repositories. Understand how to clone, fetch, pull, and push changes to remote repositories. Explore platforms like GitHub, GitLab, and Bitbucket.
+- **🔹 [Chapter 5: Branching](./chapters/chapter-5/README.md)**  
+   _Overview:_ Learn how to create, switch, and manage branches in Git. Understand branch divergence and how Git stores branch information internally. Master workflows for isolating changes and collaborating effectively.
 
 - **🔹 [Chapter 6: Advanced Git](./chapters/chapter-6/README.md)**  
    _Overview:_ Discover advanced Git concepts such as rebasing, stashing, tagging, and cherry-picking. Learn how to use Git hooks, manage large files with Git LFS, and optimize your Git workflow.

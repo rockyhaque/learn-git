@@ -35,14 +35,6 @@ By the end of this chapter, you'll:
 3. Handle duplicate keys and clean up unnecessary configurations.
 4. Customize Git settings for your workflow.
 
----
-
-## Prerequisites
-
-Basic familiarity with Git commands (e.g., `git init`, `git add`, `git commit`) and terminal usage is recommended. If you're new to Git, review Chapters 1 and 2 before starting this chapter.
-
----
-
 ## Start Your Journey
 
 Begin with [Lesson 1: Git Config](./lesson-1/README.md) to learn how to set and view Git configuration values at **local** and **global** levels.
