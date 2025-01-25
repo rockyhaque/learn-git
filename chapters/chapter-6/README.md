@@ -33,17 +33,6 @@ By the end of this chapter, you will be able to:
 4. Perform fast-forward merges and understand their benefits.
 5. Clean up branches after merging to maintain a clean repository.
 
----
-
-## Prerequisites
-
-Before starting this chapter, ensure you have:
-
-- A basic understanding of Git commands (e.g., `git commit`, `git branch`, `git checkout`).
-- A working Git repository to practice the concepts.
-
----
-
 ## Start Here
 
 Begin with **[Lesson 1: Merge](./lesson-1/README.md)** and follow the lessons sequentially to build your understanding of merging in Git.
