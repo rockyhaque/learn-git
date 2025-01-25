@@ -1,81 +1,122 @@
-# Editing a File Using Neovim
+# Git Merge Commits Guide
 
-## Assignment Overview
-
-A public file contains a company password that needs to be redacted. This guide will walk you through editing the file using Neovim and replacing the sensitive information.
+This guide explains what a merge commit is, how it works, and provides a step-by-step assignment to practice merging branches in Git.
 
 ---
 
-## Steps to Edit and Save the File
+## What is a Merge Commit?
 
-### 1. Open the File
+A **merge commit** is the result of combining two branches. When you merge one branch into another, Git creates a new commit that incorporates the changes from both branches. This commit has two parent commits, one from each branch.
 
-To open the target file, run the following command in your terminal:
+---
 
-```bash
-nvim worldbanc/public/company_info.md
+## Visual Example of a Merge Commit
+
+Let's say you start with the following commit history:
+
+```
+A - B - C    main
+   \
+    D - E    vimchadsonly
 ```
 
-This will open the Markdown file in Neovim.
+When you merge `vimchadsonly` into `main` by running `git merge vimchadsonly` while on the `main` branch, Git will:
+
+1. Find the **merge base** (the best common ancestor of the two branches). In this case, it's commit `A`.
+2. Replay the changes from `main` (starting from `A`) into a new commit.
+3. Replay the changes from `vimchadsonly` (starting from `A`) onto `main`.
+4. Record the result as a new commit, in this case, `F`.
+
+The resulting commit history will look like this:
+
+```
+A - B - C - F    main
+   \     /
+    D - E        vimchadsonly
+```
+
+Here, `F` is a special merge commit with two parents: `C` (from `main`) and `E` (from `vimchadsonly`).
 
 ---
 
-### 2. Navigate to the Password
+## Assignment: Merge `add_classics` into `main`
 
-- Upon opening, you'll be in **normal mode**, which is used for navigating and manipulating text.
-- Use the **arrow keys** to move the cursor to the last line where the password is located.
+Your current `webflyx` commit history looks like this:
+
+```
+A - B - C - E    main
+         \
+           D     add_classics
+```
+
+### Steps to Complete the Assignment
+
+1. **Switch to the `main` branch**:
+
+   ```bash
+   git checkout main
+   ```
+
+2. **Merge `add_classics` into `main`**:
+   Run the following command to initiate the merge:
+
+   ```bash
+   git merge add_classics
+   ```
+
+3. **Update the commit message**:
+
+   - Git will open a code editor (e.g., Vim, Nano, or your default editor) with a default merge commit message.
+   - Update the commit message to start with `F:`. For example:
+     ```
+     F: Merge branch 'add_classics'
+     ```
+   - Save the file and close the editor:
+     - In **Vim**: Press `Esc`, then type `:wq` and press `Enter`.
+     - In **Nano**: Press `Ctrl + O` to save, then `Ctrl + X` to exit.
+     - In **VSCode**: Press `Ctrl + S` (Windows/Linux) or `Cmd + S` (Mac) to save, then close the editor.
+
+4. **View the commit history**:
+   After the merge is complete, run the following command to see a visual representation of the commit history:
+
+   ```bash
+   git log --oneline --decorate --graph --parents
+   ```
+
+   Your commit history should now look like this:
+
+   ```
+   *   F: Merge branch 'add_classics'    main
+   |\
+   | * D: Add classics.csv              add_classics
+   * | E: Update contents.md            main
+   |/
+   * C: Initial commit
+   * B: Add titles.md
+   * A: Initialize repository
+   ```
 
 ---
 
-### 3. Enter Insert Mode
+### Tips
 
-Once you've positioned the cursor correctly:
+- **Fixing a Commit Message**:
+  If you mess up the commit message, you can amend it using:
 
-- Press `i` to enter **insert mode** (you should see `-- INSERT --` at the bottom of the screen).
-- Delete the password and replace it with:
-
-  ```text
-  REDACTED
+  ```bash
+  git commit --amend -m "F: Merge branch 'add_classics'"
   ```
 
----
-
-### 4. Save the Changes
-
-After replacing the password:
-
-- Press `esc` to return to **normal mode**.
-- Type `:w` and press **Enter** to save the changes.
+- **Exiting the Editor**:
+  - **Nano**: Press `Ctrl + X`, then `Y` to confirm, and `Enter` to save.
+  - **Vim**: Press `Esc`, then type `:wq` and press `Enter`.
+  - **VSCode**: Save with `Ctrl + S` (Windows/Linux) or `Cmd + S` (Mac), then close the editor.
 
 ---
 
-### 5. Exit Neovim
+## Summary
 
-Once the changes are saved:
-
-- Type `:q` and press **Enter** to quit Neovim.
-
----
-
-### 6. Verify the Changes
-
-To confirm the file was edited correctly, use the following command:
-
-```bash
-cat worldbanc/public/company_info.md
-```
-
-This will display the updated contents of the file in the terminal.
-
----
-
-### Conclusion
-
-Congratulations! You've successfully:
-
-- Opened the file in Neovim
-- Navigated and edited the content
-- Saved and exited without issues
-- Verified the changes using `cat`
-
-Mastering these basic Neovim commands is an essential skill for developers.
+- A merge commit combines changes from two branches into one.
+- Use `git merge <branch>` to merge a branch into the current branch.
+- Update the commit message to include a meaningful prefix (e.g., `F:`).
+- Use `git log --oneline --decorate --graph --parents` to visualize the commit history.

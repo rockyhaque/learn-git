@@ -1,71 +1,96 @@
-# Package Managers
+# Git Branching and Merging Guide
 
-A package manager is a software tool that helps you install other software. Its primary functions include:
+This guide explains the purpose of using multiple branches in Git, how to merge them, and provides a step-by-step assignment to practice these concepts.
 
-- Downloading software from official sources
-- Installing software
-- Updating software
-- Removing software
-- Managing dependencies
+---
 
-As a developer, you'll frequently use package managers to get access to the software you need to get your work done.
+## Why Use Multiple Branches?
 
-## APT (Ubuntu)
+You might ask, _"What's the point of having multiple branches?"_ Branches are commonly used to safely make changes without affecting the primary branch (e.g., `main`). Once you're satisfied with your changes, you can merge them back into the main branch to incorporate them into the final product.
 
-APT, or "Advanced Package Tool", is the primary package manager for Ubuntu. Although other package managers can be used on Ubuntu, APT is the default and most common.
+---
 
-If you're using WSL and Ubuntu, you'll be using APT. To check if APT is installed, run the following command:
+## Visual Example of Branching and Merging
 
-```sh
-apt --version
+Imagine you have two branches, each with their own unique commits:
+
+```
+A - B - C    main
+   \
+    D - E    other_branch
 ```
 
-## Brew (macOS)
+When you merge `other_branch` into `main`, Git combines both branches by creating a new merge commit. This commit has both histories as parents. In the diagram below, `F` is the merge commit that combines the changes from `D` and `E` into `main`:
 
-There isn't a "default" package manager for macOS. The most popular (but unofficial) package manager is Homebrew.
-
-If you're on macOS and don't have Homebrew installed, you can install it by running the following command:
-
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+A - B - C - F    main
+   \     /
+    D - E        other_branch
 ```
 
-For more information, visit the [Homebrew website](https://brew.sh).
+---
 
-## Assignment: Installing Neovim
+## Assignment: Update `contents.md` and Commit Changes
 
-Neovim is a hyperextensible and newer version of Vim, which itself is a modernized version of Vi, a popular command line text editor.
+1. **Switch back to the `main` branch**:
 
-### WSL/Ubuntu Instructions
-
-1. Update APT to ensure it installs the latest version of Neovim:
-
-   ```sh
-   sudo apt update
+   ```bash
+   git checkout main
    ```
 
-2. Install Neovim:
+2. **Update the `contents.md` file**:
+   Open `contents.md` and add the following content:
 
-   ```sh
-   sudo apt install neovim
+   ```markdown
+   # contents
+
+   - titles.md: The movie titles in the WebFlyx collection
+   - classics.csv: A comma-separated list of classic movies
+   - quotes: A directory of files containing memorable quotes from movies
    ```
 
-### macOS Instructions
+3. **Commit the changes**:
+   Use a commit message starting with `E:`:
 
-If you're using Homebrew on Mac, you can install Neovim by running:
+   ```bash
+   git add contents.md
+   git commit -m "E: Update contents.md with file descriptions"
+   ```
 
-```sh
-brew install neovim
-```
+4. **View the commit history**:
+   Run the following command to see a visual representation of your commit history:
 
-### Other Installation Methods
+   ```bash
+   git log --oneline --graph --all
+   ```
 
-If the above methods don't work, consider exploring other installation methods available on the official [Neovim website](https://neovim.io).
+   Your commit history should now look like this:
 
-## Check Installation
+   ```
+   A - B - C - E    main
+            \
+              D     add_classics
+   ```
 
-Once Neovim is installed, verify the installation by running:
+---
 
-```sh
-nvim --version
-```
+## Additional Git Log Commands
+
+- View a graphical representation of the commit history:
+
+  ```bash
+  git log --graph
+  ```
+
+- View the commit history for all branches:
+  ```bash
+  git log --all
+  ```
+
+---
+
+## Summary
+
+- Branches allow you to work on changes independently without affecting the main branch.
+- Merging combines changes from one branch into another, creating a new merge commit.
+- Use `git log --oneline --graph --all` to visualize your commit history.

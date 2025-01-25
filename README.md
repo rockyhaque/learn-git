@@ -21,8 +21,8 @@ Welcome to the **Learn Git** repository! This resource is designed to help you m
 - **🔹 [Chapter 5: Branching](./chapters/chapter-5/README.md)**  
    _Overview:_ Learn how to create, switch, and manage branches in Git. Understand branch divergence and how Git stores branch information internally. Master workflows for isolating changes and collaborating effectively.
 
-- **🔹 [Chapter 6: Advanced Git](./chapters/chapter-skip/README.md)**  
-   _Overview:_ Discover advanced Git concepts such as rebasing, stashing, tagging, and cherry-picking. Learn how to use Git hooks, manage large files with Git LFS, and optimize your Git workflow.
+- **🔹 [Chapter 6: Merge](./chapters/chapter-6/README.md)**  
+   _Overview:_ Master Git merging, from basic branch combining to advanced techniques like merge commits and fast-forward merges. Visualize history with merge logs and clean up branches for efficient workflows.
 
 - **🔹 [Chapter 7: Collaboration with Git](./chapters/chapter-skip/README.md)**  
    _Overview:_ Learn best practices for collaborating with others using Git. Understand how to use pull requests, code reviews, and issue tracking. Explore tools and workflows for effective team collaboration.
