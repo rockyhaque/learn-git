@@ -44,7 +44,7 @@ This command creates a commit with the message `"Add initial project structure"`
    Use `git commit` to create a commit with a descriptive message:
 
    ```bash
-   git commit -m "Describe the changes made in this commit"
+   git commit -m "A: add contents.md"
    ```
 
 3. **Check the Status:**  

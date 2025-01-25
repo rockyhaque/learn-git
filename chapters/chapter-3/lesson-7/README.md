@@ -74,7 +74,7 @@ In this assignment, you'll explore how Git stores data by creating new files and
 
 2. Commit the changes with a meaningful commit message. For example:
    ```bash
-   git commit -m "Add quotes directory with starwars.md and dune.md"
+   git commit -m "C: add quotes"
    ```
 
 ### Step 4: Inspect the Blob Hash for `titles.md` Again

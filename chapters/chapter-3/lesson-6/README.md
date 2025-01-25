@@ -29,7 +29,7 @@ In this lesson, you'll create a second commit to add a new file to your Git repo
 3. **Commit the Changes:**  
    Commit the changes with a meaningful commit message. For example:
    ```bash
-   git commit -m "Add titles.md with a list of movie titles"
+   git commit -m "B: add titles"
    ```
 
 ---
