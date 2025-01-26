@@ -1,104 +1,74 @@
-# Git Merge Log Explanation
+# Git Assignment: Practicing Rebase with `update_dune` Branch
 
-This guide explains how to interpret the output of `git log --oneline --decorate --graph --parents` after performing a merge. It also provides a breakdown of the commit history structure.
+## Objective
 
----
-
-## Understanding the Merge Log
-
-After merging two branches, running the following command will display a detailed log of your commit history:
-
-```bash
-git log --oneline --decorate --graph --parents
-```
-
-Here’s an example of what the output might look like:
-
-```
-*   89629a9 d234104 b8dfd64 (HEAD -> main) F: Merge branch 'add_classics'
-|\
-| * b8dfd64 fba0999 (tag: 5.8, add_classics) D: add classics
-* | d234104 fba0999 (tag: 6.1) E: update contents
-|/
-* fba0999 1381199 (tag: 3.8, origin/master, origin/main, master) C: add quotes
-* 1381199 a21228f (tag: 3.7) B: add titles.md
-* a21228f A: add contents.md
-```
+This assignment walks you through adding commits to the `update_dune` branch and then rebasing it onto the `main` branch. By following these steps, you'll understand how rebasing integrates changes and creates a linear commit history.
 
 ---
 
-## Breakdown of the Merge Log
+## Steps to Complete the Assignment
 
-### 1. **Merge Commit**
+### 1. Add Two Commits to the `update_dune` Branch
 
-```
-*   89629a9 d234104 b8dfd64 (HEAD -> main) F: Merge branch 'add_classics'
-```
+1. Ensure you are on the `update_dune` branch:
+   ```bash
+   git switch update_dune
+   ```
+2. Add the first quote to the `quotes/dune.md` file:
+   - Open the file and add the following line:
+     ```
+     "The spice must flow."
+     ```
+   - Stage and commit the change with a commit message starting with `H:`:
+     ```bash
+     git add quotes/dune.md
+     git commit -m "H: Add 'The spice must flow.'"
+     ```
+3. Add the second quote to the `quotes/dune.md` file:
+   - Open the file and add the following line:
+     ```
+     "Fear is the mind-killer."
+     ```
+   - Stage and commit the change with a commit message starting with `I:`:
+     ```bash
+     git add quotes/dune.md
+     git commit -m "I: Add 'Fear is the mind-killer.'"
+     ```
 
-- This is the **merge commit** created when you merged `add_classics` into `main`.
-- **89629a9**: The hash of the merge commit.
-- **d234104** and **b8dfd64**: The hashes of the two parent commits (from `main` and `add_classics`, respectively).
-- **(HEAD -> main)**: Indicates that `main` is the current branch.
-- **F: Merge branch 'add_classics'**: The commit message for the merge.
+### 2. Rebase `update_dune` onto `main`
 
----
+1. While still on the `update_dune` branch, rebase your changes onto `main`:
+   ```bash
+   git rebase main
+   ```
+   - This will:
+     1. Checkout the latest commit from `main` into a temporary location.
+     2. Replay each commit from `update_dune` (e.g., `H` and `I`) one at a time onto this temporary location.
+     3. Update the `update_dune` branch to point to the last replayed commit, making this the new permanent `update_dune`.
+   - The `main` branch remains unaffected.
 
-### 2. **Branch Structure**
+### 3. Verify the Commit History
 
-```
-|\
-| * b8dfd64 fba0999 (tag: 5.8, add_classics) D: add classics
-* | d234104 fba0999 (tag: 6.1) E: update contents
-|/
-```
-
-- This section visually represents the branches before the merge:
-  - The left branch (`|`) represents `main`.
-  - The right branch (`| *`) represents `add_classics`.
-- **b8dfd64**: The last commit on the `add_classics` branch before the merge.
-- **d234104**: The last commit on the `main` branch before the merge.
-- Both branches share a common ancestor (`fba0999`).
-
----
-
-### 3. **Normal Commits**
-
-```
-* fba0999 1381199 (tag: 3.8, origin/master, origin/main, master) C: add quotes
-* 1381199 a21228f (tag: 3.7) B: add titles.md
-* a21228f A: add contents.md
-```
-
-- These are the commits that occurred before the branches diverged.
-- Each commit points to its parent commit:
-  - **fba0999**: The commit that added quotes.
-  - **1381199**: The commit that added `titles.md`.
-  - **a21228f**: The initial commit that added `contents.md`.
-
----
-
-## Key Points to Remember
-
-- **Asterisks (`*`)**: Represent commits in the repository.
-- **Parent Hashes**: The `--parents` flag includes the parent commit hashes for each commit.
-- **Merge Commit**: A merge commit has two parent hashes, one from each branch.
-- **Branch Visualization**: The `--graph` flag creates a visual representation of the branch structure.
-- **Tags and Branches**: The `--decorate` flag shows tags and branch names associated with commits.
+1. Run the following command to view the commit history:
+   ```bash
+   git log --oneline
+   ```
+2. You should see a nice linear history from `A` to `I`, even though you originally branched off the `D` commit from `main`.
 
 ---
 
-## Tips
+## Expected Outcome
 
-- **Amending a Commit Message**:
-  If you make a mistake, you can amend the commit message with:
+- You have added two commits (`H` and `I`) to the `update_dune` branch.
+- You have successfully rebased `update_dune` onto `main`, creating a linear history.
+- The `update_dune` branch now includes all changes from `main` and your new commits.
 
-  ```bash
-  git commit --amend -m "F: Merge branch 'add_classics'"
-  ```
+---
 
-- **Exiting the Editor**:
-  - **Vim**: Press `Esc`, then type `:wq` and press `Enter`.
-  - **Nano**: Press `Ctrl + X`, then `Y` to confirm, and `Enter` to save.
-  - **VSCode**: Save with `Ctrl + S` (Windows/Linux) or `Cmd + S` (Mac), then close the editor.
+## Key Takeaways
+
+- **Rebasing** integrates changes by replaying commits on top of another branch, creating a clean, linear history.
+- Rebasing is ideal for feature branches that need to stay up-to-date with the latest changes from `main`.
+- Always resolve conflicts carefully during a rebase to ensure the integrity of your changes.
 
 ---

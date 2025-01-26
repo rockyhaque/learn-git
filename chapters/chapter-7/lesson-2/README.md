@@ -1,122 +1,46 @@
-# Git Merge Commits Guide
+# Git Assignment: Creating a New Branch
 
-This guide explains what a merge commit is, how it works, and provides a step-by-step assignment to practice merging branches in Git.
+## Objective
 
----
-
-## What is a Merge Commit?
-
-A **merge commit** is the result of combining two branches. When you merge one branch into another, Git creates a new commit that incorporates the changes from both branches. This commit has two parent commits, one from each branch.
+This assignment guides you through creating a new feature branch (`update_dune`) that branches off a specific commit (`D`) to practice rebasing. By branching off an older commit, you can simulate working on a feature branch that doesn't include recent changes from `main`.
 
 ---
 
-## Visual Example of a Merge Commit
+## Steps to Complete the Assignment
 
-Let's say you start with the following commit history:
+### 1. Identify the Commit Hash for `D`
 
-```
-A - B - C    main
-   \
-    D - E    vimchadsonly
-```
-
-When you merge `vimchadsonly` into `main` by running `git merge vimchadsonly` while on the `main` branch, Git will:
-
-1. Find the **merge base** (the best common ancestor of the two branches). In this case, it's commit `A`.
-2. Replay the changes from `main` (starting from `A`) into a new commit.
-3. Replay the changes from `vimchadsonly` (starting from `A`) onto `main`.
-4. Record the result as a new commit, in this case, `F`.
-
-The resulting commit history will look like this:
-
-```
-A - B - C - F    main
-   \     /
-    D - E        vimchadsonly
-```
-
-Here, `F` is a special merge commit with two parents: `C` (from `main`) and `E` (from `vimchadsonly`).
-
----
-
-## Assignment: Merge `add_classics` into `main`
-
-Your current `webflyx` commit history looks like this:
-
-```
-A - B - C - E    main
-         \
-           D     add_classics
-```
-
-### Steps to Complete the Assignment
-
-1. **Switch to the `main` branch**:
-
+1. Run the following command to view the commit history:
    ```bash
-   git checkout main
+   git log --oneline
+   ```
+2. Locate the commit hash for `D` in the output. It will look something like this:
+   ```
+   abc1234 D
    ```
 
-2. **Merge `add_classics` into `main`**:
-   Run the following command to initiate the merge:
+### 2. Create and Switch to the New Branch
 
+1. Use the `git switch` command to create and switch to the new branch `update_dune`, branching off commit `D`:
    ```bash
-   git merge add_classics
+   git switch -c update_done COMMITHASH
    ```
+   Replace `COMMITHASH` with the actual hash of commit `D` (e.g., `abc1234`).
 
-3. **Update the commit message**:
+### 3. Verify the New Branch
 
-   - Git will open a code editor (e.g., Vim, Nano, or your default editor) with a default merge commit message.
-   - Update the commit message to start with `F:`. For example:
-     ```
-     F: Merge branch 'add_classics'
-     ```
-   - Save the file and close the editor:
-     - In **Vim**: Press `Esc`, then type `:wq` and press `Enter`.
-     - In **Nano**: Press `Ctrl + O` to save, then `Ctrl + X` to exit.
-     - In **VSCode**: Press `Ctrl + S` (Windows/Linux) or `Cmd + S` (Mac) to save, then close the editor.
-
-4. **View the commit history**:
-   After the merge is complete, run the following command to see a visual representation of the commit history:
-
+1. Confirm that you are on the `update_dune` branch and that `D` is the last commit:
    ```bash
-   git log --oneline --decorate --graph --parents
+   git log --oneline -n 1
    ```
-
-   Your commit history should now look like this:
-
-   ```
-   *   F: Merge branch 'add_classics'    main
-   |\
-   | * D: Add classics.csv              add_classics
-   * | E: Update contents.md            main
-   |/
-   * C: Initial commit
-   * B: Add titles.md
-   * A: Initialize repository
-   ```
+   The output should show the commit `D` as the most recent commit on the `update_dune` branch.
 
 ---
 
-### Tips
+## Expected Outcome
 
-- **Fixing a Commit Message**:
-  If you mess up the commit message, you can amend it using:
-
-  ```bash
-  git commit --amend -m "F: Merge branch 'add_classics'"
-  ```
-
-- **Exiting the Editor**:
-  - **Nano**: Press `Ctrl + X`, then `Y` to confirm, and `Enter` to save.
-  - **Vim**: Press `Esc`, then type `:wq` and press `Enter`.
-  - **VSCode**: Save with `Ctrl + S` (Windows/Linux) or `Cmd + S` (Mac), then close the editor.
+- You have successfully created a new branch (`update_dune`) that branches off commit `D`.
+- The `update_dune` branch does not include any commits after `D` (e.g., `E`, `F`, etc.).
+- You are ready to practice rebasing this branch onto the latest `main` branch.
 
 ---
-
-## Summary
-
-- A merge commit combines changes from two branches into one.
-- Use `git merge <branch>` to merge a branch into the current branch.
-- Update the commit message to include a meaningful prefix (e.g., `F:`).
-- Use `git log --oneline --decorate --graph --parents` to visualize the commit history.
