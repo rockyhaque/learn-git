@@ -24,7 +24,7 @@ Welcome to the **Learn Git** repository! This resource is designed to help you m
 - **🔹 [Chapter 6: Merge](./chapters/chapter-6/README.md)**  
    _Overview:_ Master merging branches, including merge commits and fast-forward merges.
 
-- **🔹 [Chapter 7: Rebase](./chapters/chapter-skip/README.md)**  
+- **🔹 [Chapter 7: Rebase](./chapters/chapter-7/README.md)**  
    _Overview:_ Use rebase for a clean, linear history and learn when to rebase vs. merge.
 
 - **🔹 [Chapter 8: Git Troubleshooting](./chapters/chapter-skip/README.md)**  
