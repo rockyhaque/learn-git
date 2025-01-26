@@ -7,28 +7,28 @@ Welcome to the **Learn Git** repository! This resource is designed to help you m
 ### 📚 **Chapters**
 
 - **🔹 [Chapter 1: Setup](./chapters/chapter-1/README.md)**  
-   _Overview:_ Get introduced to Git and version control systems (VCS). Learn how to install Git, configure your identity, and understand its core concepts. Explore essential topics like command syntax, the difference between high-level (porcelain) and low-level (plumbing) commands, and how to use Git's built-in documentation.
+   _Overview:_ Install Git, configure your identity, and learn basic commands and workflows.
 
 - **🔹 [Chapter 2: Repositories](./chapters/chapter-2/README.md)**  
-   _Overview:_ Learn how to create, manage, and track changes in Git repositories. Understand the core Git workflow, including staging changes, committing snapshots, and viewing commit history. Explore essential commands like `git init`, `git status`, `git add`, `git commit`, and `git log` to effectively version control your projects.
+   _Overview:_ Create and manage repositories, stage changes, commit snapshots, and view history.
 
 - **🔹 [Chapter 3: Internals](./chapters/chapter-3/README.md)**  
-   _Overview:_ Dive into the inner workings of Git and understand its core architecture. Learn about Git's object model, including commits, trees, and blobs, and how they work together to track changes. Explore low-level commands and data storage mechanisms to gain a deeper understanding of how Git manages version control under the hood.
+   _Overview:_ Explore Git's architecture, including commits, trees, and blobs, and how it tracks changes.
 
 - **🔹 [Chapter 4: Config](./chapters/chapter-4/README.md)**  
-   _Overview:_ Learn how to configure Git at local and global levels. Understand how to set, retrieve, and manage configuration values, handle duplicate keys, and remove unnecessary settings. Explore Git's configuration hierarchy and how to customize it for your workflow.
+   _Overview:_ Configure Git settings at local and global levels for a customized workflow.
 
 - **🔹 [Chapter 5: Branching](./chapters/chapter-5/README.md)**  
-   _Overview:_ Learn how to create, switch, and manage branches in Git. Understand branch divergence and how Git stores branch information internally. Master workflows for isolating changes and collaborating effectively.
+   _Overview:_ Create, switch, and manage branches to isolate changes and collaborate effectively.
 
 - **🔹 [Chapter 6: Merge](./chapters/chapter-6/README.md)**  
-   _Overview:_ Master Git merging, from basic branch combining to advanced techniques like merge commits and fast-forward merges. Visualize history with merge logs and clean up branches for efficient workflows.
+   _Overview:_ Master merging branches, including merge commits and fast-forward merges.
 
-- **🔹 [Chapter 7: Collaboration with Git](./chapters/chapter-skip/README.md)**  
-   _Overview:_ Learn best practices for collaborating with others using Git. Understand how to use pull requests, code reviews, and issue tracking. Explore tools and workflows for effective team collaboration.
+- **🔹 [Chapter 7: Rebase](./chapters/chapter-skip/README.md)**  
+   _Overview:_ Use rebase for a clean, linear history and learn when to rebase vs. merge.
 
 - **🔹 [Chapter 8: Git Troubleshooting](./chapters/chapter-skip/README.md)**  
-   _Overview:_ Learn how to troubleshoot common Git issues. Understand how to recover lost commits, resolve conflicts, and clean up your repository. Explore tools and techniques for debugging Git problems.
+   _Overview:_ Troubleshoot common Git issues like lost commits, conflicts, and repository cleanup.
 
 ---
 
