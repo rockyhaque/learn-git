@@ -27,8 +27,8 @@ Welcome to the **Learn Git** repository! This resource is designed to help you m
 - **🔹 [Chapter 7: Rebase](./chapters/chapter-7/README.md)**  
    _Overview:_ Use rebase for a clean, linear history and learn when to rebase vs. merge.
 
-- **🔹 [Chapter 8: Git Troubleshooting](./chapters/chapter-skip/README.md)**  
-   _Overview:_ Troubleshoot common Git issues like lost commits, conflicts, and repository cleanup.
+- **🔹 [Chapter 8: Reset](./chapters/chapter-8/README.md)**  
+   _Overview:_ Learn to undo changes and clean up your repository using git reset. Understand --soft, --mixed, and --hard options and use them safely.
 
 ---
 
