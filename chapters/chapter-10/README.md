@@ -1,4 +1,4 @@
-# Chapter 5: GitHub
+# Chapter 10: GitHub
 
 In this chapter, you'll learn how to effectively use GitHub for version control and collaboration. You'll understand how to work with repositories, push code, handle pull requests, and manage project workflows. By the end of this chapter, you'll be comfortable with essential GitHub operations and collaborative development practices.
 

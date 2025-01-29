@@ -33,7 +33,7 @@ Welcome to the **Learn Git** repository! This resource is designed to help you m
 - **🔹 [Chapter 9: Remote](./chapters/chapter-9/README.md)**  
    _Overview:_ Learn how to manage remotes in Git, fetch data, and merge changes from remote repositories. Understand fast-forward merges and how to view remote commit history with git log.
 
-- **🔹 [Chapter 9: GitHub](./chapters/chapter-10/README.md)**  
+- **🔹 [Chapter 10: GitHub](./chapters/chapter-10/README.md)**  
    _Overview:_ Learn to create and manage GitHub repositories, push/pull code changes, and handle pull requests for effective team collaboration.
 
 ---
