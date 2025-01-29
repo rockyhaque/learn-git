@@ -28,7 +28,7 @@ Welcome to the **Learn Git** repository! This resource is designed to help you m
    _Overview:_ Use rebase for a clean, linear history and learn when to rebase vs. merge.
 
 - **🔹 [Chapter 8: Reset](./chapters/chapter-8/README.md)**  
-   _Overview:_ Learn to undo changes and clean up your repository using git reset. Understand --soft, --mixed, and --hard options and use them safely.
+   _Overview:_ Learn to undo changes and clean up your repository using git reset. Understand --soft, --hard options and use them safely.
 
 - **🔹 [Chapter 9: Remote](./chapters/chapter-9/README.md)**  
    _Overview:_ Learn how to manage remotes in Git, fetch data, and merge changes from remote repositories. Understand fast-forward merges and how to view remote commit history with git log.
